@@ -1,22 +1,44 @@
+const telegramUrl = 'https://t.me/+6i_IEET22FBhMWY1';
+
+// Button click redirect
 const joinBtn = document.getElementById('joinBtn');
 joinBtn.addEventListener('click', () => {
-  const telegramUrl = 'https://t.me/+6i_IEET22FBhMWY1';
-  // small pulse animation
-  joinBtn.animate([
-    { transform: 'scale(1)' },
-    { transform: 'scale(0.98)' },
-    { transform: 'scale(1)' }
-  ], { duration: 300, easing: 'ease-out' });
+  joinBtn.animate(
+    [
+      { transform: 'scale(1)' },
+      { transform: 'scale(0.97)' },
+      { transform: 'scale(1)' }
+    ],
+    { duration: 300, easing: 'ease-out' }
+  );
 
-  // redirect to telegram
   window.open(telegramUrl, '_blank');
 });
 
-// Simple entrance animation for card
+// Auto Redirect Timer (5 sec)
+let timeLeft = 5;
+const autoTimer = document.getElementById('autoTimer');
+
+function startAutoRedirect() {
+  autoTimer.textContent = `Redirecting in ${timeLeft} sec...`;
+
+  if (timeLeft === 0) {
+    window.location.href = telegramUrl;
+    return;
+  }
+
+  timeLeft--;
+  setTimeout(startAutoRedirect, 1000);
+}
+
+startAutoRedirect();
+
+// Card entrance animation
 window.addEventListener('load', () => {
   const card = document.querySelector('.card');
   card.style.opacity = 0;
   card.style.transform = 'translateY(16px)';
+
   setTimeout(() => {
     card.style.transition = 'opacity .6s ease, transform .6s cubic-bezier(.2,.9,.3,1)';
     card.style.opacity = 1;
